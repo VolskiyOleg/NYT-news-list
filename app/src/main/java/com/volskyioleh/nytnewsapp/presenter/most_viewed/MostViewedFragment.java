@@ -40,7 +40,6 @@ public class MostViewedFragment extends Fragment  implements
     @BindView(R.id.recyclerViewViewed)
     RecyclerView recyclerView;
     private ArticlesAdapter mAdapter;
-    private List<ArticleModel> modelList;
 
     public MostViewedFragment() {
         // Required empty public constructor
@@ -69,7 +68,6 @@ public class MostViewedFragment extends Fragment  implements
         ButterKnife.bind(this, view);
         mPresenter.attachPresenter(this);
         mPresenter.getMostViewedArticlesList();
-        modelList = new ArrayList<>();
         mAdapter = new ArticlesAdapter(new ArrayList<>(), getContext(), this::addToFavorite);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mAdapter);
@@ -80,7 +78,6 @@ public class MostViewedFragment extends Fragment  implements
     public void showList(LiveData<List<ArticleModel>> articles) {
         articles.observe(this,entries -> {
             mAdapter.setmArticles(entries);
-            modelList = entries;
         });
     }
 

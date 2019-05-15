@@ -36,14 +36,11 @@ public class FavoriteListActivity extends AppCompatActivity implements FavoriteC
     RecyclerView recyclerView;
     private ArticlesAdapter mAdapter;
 
-    private List<ArticleModel> modelList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite_list);
         ButterKnife.bind(this);
-        modelList = new ArrayList<>();
         onInjectDependencies(App.get(this).getApiComponent());
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -69,7 +66,6 @@ public class FavoriteListActivity extends AppCompatActivity implements FavoriteC
     public void showList(LiveData<List<ArticleModel>> articles) {
         articles.observe(this, entries -> {
             mAdapter.setmArticles(entries);
-            modelList = entries;
         });
     }
 

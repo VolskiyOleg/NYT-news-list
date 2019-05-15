@@ -55,8 +55,7 @@ public class MostEmailedPresenter extends BasePresenterAbs<MosetEmailedContract.
             Article article = response.results.get(i);
             articleModels.add(new ArticleModel(article.id, article.url, article.title, article.abstractText, article.media.get(0).mediaMetadata.get(article.media.get(0).mediaMetadata.size() - 1).url, 0, article.byline, getDateMillis(article.published_date), false));
         }
-       // Observable.fromCallable(() -> ArticlesDB.getDatabase(App.getAppContext()).articlesDao().insert(articleModels));
-     //   Observable.fromCallable(() -> ArticlesDB.getDatabase(App.getAppContext()).articlesDao().insert(articleModels));
+
         Completable.fromAction(() ->ArticlesDB.getDatabase(App.getAppContext()).articlesDao().insert(articleModels)) .subscribeOn(Schedulers.io())
                 .subscribe();
     }

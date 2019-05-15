@@ -39,7 +39,7 @@ public class MostEmailedFragment extends Fragment implements
     @BindView(R.id.recyclerViewEmailed)
     RecyclerView recyclerView;
     private ArticlesAdapter mAdapter;
-    private List<ArticleModel> modelList;
+
 
     public MostEmailedFragment() {
         // Required empty public constructor
@@ -67,7 +67,6 @@ public class MostEmailedFragment extends Fragment implements
         View view = inflater.inflate(R.layout.fragment_most_emailed , container, false);
         ButterKnife.bind(this, view);
         mPresenter.attachPresenter(this);
-        modelList = new ArrayList<>();
         mPresenter.getMostEmailedArticlesList();
         mAdapter = new ArticlesAdapter(new ArrayList<>(), getContext(), this::addToFavorite);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -79,9 +78,7 @@ public class MostEmailedFragment extends Fragment implements
     public void showList(LiveData<List<ArticleModel>> articles) {
         articles.observe(this,entries -> {
             mAdapter.setmArticles(entries);
-            modelList = entries;
         });
-       // Log.d("NOT_FUUUCK_Fragment", " " + articles.get(0).id);
     }
     @Override
     public void addToFavorite(int position, long id) {

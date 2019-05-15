@@ -40,7 +40,6 @@ public class MostSharedFragment extends Fragment implements
     @BindView(R.id.recyclerViewShared)
     RecyclerView recyclerView;
     private ArticlesAdapter mAdapter;
-    private List<ArticleModel> modelList;
 
     public MostSharedFragment() {
         // Required empty public constructor
@@ -68,7 +67,6 @@ public class MostSharedFragment extends Fragment implements
         View view = inflater.inflate(R.layout.fragment_most_shared , container, false);
         ButterKnife.bind(this, view);
         mPresenter.attachPresenter(this);
-        modelList = new ArrayList<>();
         mPresenter.getMostSharedArticlesList();
         mAdapter = new ArticlesAdapter(new ArrayList<>(), getContext(), this::addToFavorite);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -79,9 +77,7 @@ public class MostSharedFragment extends Fragment implements
     @Override
     public void showList(LiveData<List<ArticleModel>> articles) {
         articles.observe(this,entries -> {
-            mAdapter.setmArticles(entries);
-            modelList = entries;
-        });
+            mAdapter.setmArticles(entries); });
     }
 
 
