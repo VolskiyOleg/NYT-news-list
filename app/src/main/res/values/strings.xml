@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">NYTnewsApp</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="most_emailed">Most emailed</string>
+    <string name="most_shared">Most shared</string>
+    <string name="most_viewed">Most viewed</string>
+</resources>
